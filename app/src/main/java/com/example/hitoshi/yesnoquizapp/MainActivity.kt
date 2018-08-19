@@ -64,19 +64,15 @@ class MainActivity : AppCompatActivity() {
 
         if (yourAnswer == question.second) {
             // 正解
-//             showToast("正解!")
-//            alertDialogBuilder.show()
-
-
-            dialog.show(supportFragmentManager, "")
             currentQuestionIdx++ // 次の問題へ進める
+            // showToast("正解!")
+            dialog.show(supportFragmentManager, "正解！")
+//            JudgeDialogFragment().show(supportFragmentManager, "JudgeFragement")
         } else {
             // 不正解
-//             showToast("不正解...")
-//            alertDialogBuilder.show()
-
-
-            dialog.show(supportFragmentManager, "")
+            // showToast("不正解...")
+            dialog.show(supportFragmentManager, "不正解…")
+//            JudgeDialogFragment().show(supportFragmentManager, "JudgeFragement")
         }
 
         // 最後の問題だった場合、最初の問題へ戻す
@@ -113,19 +109,32 @@ class MainActivity : AppCompatActivity() {
 class TestDialog() : DialogFragment() {
     override fun onCreateDialog(saveInstanceState: Bundle?): Dialog {
         // ここでAlertDialogを利用してダイアログを作る
-        AlertDialog.Builder(this.requireContext())
+        // AlertDialog.Builder(this.requireContext())
+        // val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder =
+                AlertDialog.Builder(this.requireContext())
+        // AlertDialog.Builder(this)
                 .setTitle("判定")
-                .setMessage("")
+                .setMessage(tag)
                 .setPositiveButton("ok"){ dialog, which ->
-                }.show()
+                }
         // 引数にnullableは適用できないので!!でnot nullであることを指定しておく
-        val dialogBuilder = AlertDialog.Builder(activity!!)
         // ここでAlertDialogに関する処理をしてCreateを返り値で渡してあげるだけ
         return dialogBuilder.create()
     }
 }
 
 
+
+
+/*
+class JudgeDialogFragment : DialogFragment() {
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState)
+    }
+}
+*/
 
 /*
 class TestDialogFragment : DialogFragment() {
@@ -138,9 +147,9 @@ class TestDialogFragment : DialogFragment() {
                 }
                 .setNegativeButton("キャンセル") { dialog, id ->
                     // User cancelled the dialog
-                }
+               }
         // Create the AlertDialog object and return it
-        return builder.create()
+        return buildert.create()
     }
 }
 */
